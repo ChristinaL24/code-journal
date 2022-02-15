@@ -24,6 +24,6 @@ $form.addEventListener('submit', function (event) {
 
   data.entries.unshift(newEntry);
 
-  /* $inputs.reset();
-     $form.reset(); */
+  $img.setAttribute('src', '../code-journal/images/placeholder-image-square.jpg');
+
 });
