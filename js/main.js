@@ -26,4 +26,6 @@ $form.addEventListener('submit', function (event) {
 
   $img.setAttribute('src', '../code-journal/images/placeholder-image-square.jpg');
 
+  $form.reset();
+
 });
