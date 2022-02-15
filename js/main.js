@@ -29,3 +29,14 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
 
 });
+
+var previousEntries = localStorage.getItem('javascript-local-storage');
+
+if (previousEntries !== null) {
+  data.entries = JSON.parse(previousEntries);
+}
+
+window.addEventListener('beforeunload', function (event) {
+  var newEntryJSON = JSON.stringify(data.entries);
+  localStorage.setItem('javascript-local-storage', newEntryJSON);
+});
