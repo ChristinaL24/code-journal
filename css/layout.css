@@ -1,3 +1,4 @@
+/* layout codes */
 .hidden {
   display: none !important;
 }
@@ -31,4 +32,19 @@
   .column-half {
     width: 50%;
   }
+}
+
+/* My code */
+
+img {
+  width: 100%;
+}
+
+label {
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
 }
