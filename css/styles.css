@@ -13,6 +13,14 @@ header {
 }
 
 input,
-textarea {
+textarea,
+button {
   font-family: "Roboto Slab", sans-serif;
+}
+
+button {
+  background-color: #1c658c;
+  color: white;
+  border-radius: 0.2rem;
+  border-style: none;
 }
