@@ -19,4 +19,6 @@ $form.addEventListener('submit', function (event) {
 
   newEntry.entryId = data.nextEntryId;
 
+  data.nextEntryId++;
+
 });
