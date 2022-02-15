@@ -3,6 +3,7 @@
 
 var $img = document.querySelector('img');
 var $inputs = document.querySelector('#photo-url');
+
 $inputs.addEventListener('input', function (event) {
   $img.setAttribute('src', event.target.value);
 });
@@ -21,4 +22,8 @@ $form.addEventListener('submit', function (event) {
 
   data.nextEntryId++;
 
+  data.entries.unshift(newEntry);
+
+  /* $inputs.reset();
+     $form.reset(); */
 });
