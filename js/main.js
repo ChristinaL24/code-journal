@@ -12,9 +12,11 @@ $form.addEventListener('submit', function (event) {
 
   event.preventDefault();
 
-  var inputValues = {};
-  inputValues.title = $form.elements.name.value;
-  inputValues.url = $form.elements.name.value;
-  inputValues.notes = $form.elements.name.value;
+  var newEntry = {};
+  newEntry.title = $form.elements.title.value;
+  newEntry.url = $form.elements.url.value;
+  newEntry.notes = $form.elements.notes.value;
+
+  newEntry.entryId = data.nextEntryId;
 
 });
