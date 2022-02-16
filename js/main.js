@@ -22,4 +22,6 @@ $form.addEventListener('submit', function (event) {
 
   data.nextEntryId++;
 
+  data.entries.unshift(newEntry);
+
 });
