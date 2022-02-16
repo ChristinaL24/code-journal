@@ -51,9 +51,9 @@ button {
 }
 
 a {
-  width: 3.5rem;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
+  width: 3.8rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 
 .inline-block-align {
@@ -65,4 +65,8 @@ a {
 
 .float {
   float: right;
+}
+
+.no-padding {
+  padding: 0;
 }
