@@ -13,7 +13,8 @@ header {
 
 input,
 textarea,
-button {
+button,
+a {
   font-family: "Roboto Slab", sans-serif;
 }
 
@@ -26,4 +27,14 @@ button {
 
 ul {
   list-style: none;
+}
+
+a {
+  background-color: #1c658c;
+  color: white;
+  border-radius: 0.2rem;
+  border-style: none;
+  text-decoration: none;
+  font-size: 0.85rem;
+  text-align: center;
 }

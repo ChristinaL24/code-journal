@@ -50,10 +50,19 @@ button {
   margin-top: 1rem;
 }
 
-.float {
-  float: right;
+a {
+  width: 3.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
 }
 
-.test {
-  margin-bottom: 5rem;
+.inline-block-align {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.float {
+  float: right;
 }
