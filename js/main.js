@@ -17,4 +17,7 @@ $form.addEventListener('submit', function (event) {
   newEntry.title = $form.elements.title.value;
   newEntry.url = $form.elements.url.value;
   newEntry.notes = $form.elements.notes.value;
+
+  newEntry.entryId = data.nextEntryId;
+
 });
