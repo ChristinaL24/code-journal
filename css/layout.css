@@ -33,3 +33,19 @@
     width: 50%;
   }
 }
+
+/* My code */
+
+img {
+  width: 100%;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+header {
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+}
