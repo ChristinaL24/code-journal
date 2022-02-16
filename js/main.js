@@ -7,3 +7,14 @@ $inputs.addEventListener('input', function (event) {
   $img.setAttribute('src', event.target.value);
 
 });
+
+var $form = document.querySelector('.form');
+$form.addEventListener('submit', function (event) {
+
+  event.preventDefault();
+
+  var newEntry = {};
+  newEntry.title = $form.elements.title.value;
+  newEntry.url = $form.elements.url.value;
+  newEntry.notes = $form.elements.notes.value;
+});
