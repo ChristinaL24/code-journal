@@ -68,3 +68,11 @@ function renderEntries(entry) {
 }
 
 var $unorderedList = document.querySelector('ul');
+window.addEventListener('DOMContentLoaded', function (event) {
+
+  for (var i = 0; i < data.entries.length; i++) {
+    var journalEntries = renderEntries(data.entries[i]);
+    $unorderedList.appendChild(journalEntries);
+  }
+
+});
