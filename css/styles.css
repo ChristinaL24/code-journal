@@ -29,7 +29,7 @@ ul {
   list-style: none;
 }
 
-a {
+.new-entry {
   background-color: #1c658c;
   color: white;
   border-radius: 0.2rem;
@@ -37,4 +37,9 @@ a {
   text-decoration: none;
   font-size: 0.85rem;
   text-align: center;
+}
+
+.nav-entries {
+  text-decoration: none;
+  color: white;
 }

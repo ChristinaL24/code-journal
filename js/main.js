@@ -29,11 +29,14 @@ $form.addEventListener('submit', function (event) {
   /* prepending in feature two */
   var $entry = renderEntries(newEntry);
   $unorderedList.prepend($entry);
-  /*                  */
+  /*                           */
 
   $form.reset();
 
 });
+
+/* Refer to the HTML right below the <h1>New Entry</> to create this dom tree;
+For the title, use a heading element; for the notes, use a paragraph element */
 
 function renderEntries(entry) {
 
@@ -64,7 +67,8 @@ function renderEntries(entry) {
   divThree.appendChild(notesParagraph);
 
   return entryList;
-
+  /* When you are logging the tree, use renderEntries([index number here])] to
+     ensure that the dom tree has printed correctly in the log */
 }
 
 var $unorderedList = document.querySelector('ul');
