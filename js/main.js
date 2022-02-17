@@ -56,13 +56,11 @@ function renderEntries(entry) {
   divOne.appendChild(divThree);
 
   var titleHeader = document.createElement('h2');
-  var titleHeaderText = titleHeader.createTextNode(entry.title);
-  titleHeader.appendChild(titleHeaderText);
+  titleHeader.textContent = entry.title;
   divThree.appendChild(titleHeader);
 
   var notesParagraph = document.createElement('p');
-  var notesParagraphText = document.createTextNode(entry.notes);
-  notesParagraph.appendChild(notesParagraphText);
+  notesParagraph.textContent = entry.notes;
   divThree.appendChild(notesParagraph);
 
   return entryList;
