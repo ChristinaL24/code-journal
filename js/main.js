@@ -88,6 +88,7 @@ var $formView = document.querySelector('.hidden');
 var $entriesView = document.querySelector('.new-entry');
 var $navEntries = document.querySelector('.nav-entries');
 var $entries = document.querySelector('.view');
+var $saveButton = document.querySelector('.save');
 
 $entriesView.addEventListener('click', function (event) {
 
@@ -97,6 +98,11 @@ $entriesView.addEventListener('click', function (event) {
 });
 
 $navEntries.addEventListener('click', function (event) {
+  $formView.className = 'hidden';
+  $entries.className = 'view';
+});
+
+$saveButton.addEventListener('click', function (event) {
   $formView.className = 'hidden';
   $entries.className = 'view';
 });
