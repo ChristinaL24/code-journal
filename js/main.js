@@ -116,6 +116,7 @@ function viewEntries(event) {
   $formView.className = 'hidden';
   $entries.className = 'view';
   data.view = 'entries';
+  noEntries();
 }
 
 /* function for no entries */
