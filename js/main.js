@@ -84,7 +84,7 @@ window.addEventListener('DOMContentLoaded', function (event) {
     var journalEntries = renderEntries(data.entries[i]);
     $unorderedList.appendChild(journalEntries);
   }
-
+  noEntries();
 });
 
 /* Codes that handle viewswapping */
@@ -108,6 +108,7 @@ function showEntries(event) {
   $formView.className = 'hidden';
   $entries.className = 'view';
   data.view = 'entries';
+  noEntries();
 }
 
 $saveButton.addEventListener('submit', viewEntries);
@@ -117,7 +118,20 @@ function viewEntries(event) {
   data.view = 'entries';
 }
 
+/* function for no entries */
+/* Make sure you put these in any functions that will display an empty
+entries page */
+var $p = document.querySelector('p');
+function noEntries() {
+  if (data.entries.length === 0) {
+    $p.className = 'text-center no-entries';
+  } else {
+    $p.className = 'text-center no-entries hidden';
+  }
+}
+
 /* condition for refresh */
+/* call createNewEntries and showEntries here */
 if (data.view === 'entry-form') {
   createNewEntries();
 } else if (data.view === 'entries') {
