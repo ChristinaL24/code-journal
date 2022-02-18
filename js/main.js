@@ -31,6 +31,7 @@ $form.addEventListener('submit', function (event) {
   /* prepending in feature two */
   var $entry = renderEntries(newEntry);
   $unorderedList.prepend($entry);
+
   /*                           */
 
 });
@@ -70,7 +71,7 @@ function renderEntries(entry) {
   divThree.appendChild(notesParagraph);
 
   return entryList;
-  /* When you are logging the tree, use renderEntries([index number here])] to
+  /* When you are logging the tree, use renderEntries(data.entries[index number]) to
   ensure that the dom tree has printed correctly in the log */
 }
 
