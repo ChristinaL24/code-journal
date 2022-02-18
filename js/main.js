@@ -26,17 +26,20 @@ $form.addEventListener('submit', function (event) {
 
   $img.setAttribute('src', '../code-journal/images/placeholder-image-square.jpg');
 
+  $form.reset();
+
   /* prepending in feature two */
   var $entry = renderEntries(newEntry);
   $unorderedList.prepend($entry);
   /*                           */
 
-  $form.reset();
-
 });
 
-/* Refer to the HTML right below the <h1>New Entry</> to create this dom tree;
-For the title, use a heading element; for the notes, use a paragraph element */
+/* Refer to the image that is given in instructions create this dom tree;
+Create a list element to hold our items, include our row, put two half-columns;
+In our first div with column-half, put the img; in the other half put the title
+and the notes; For the title, use a heading element; for the notes, use a
+paragraph element */
 
 function renderEntries(entry) {
 
@@ -68,15 +71,31 @@ function renderEntries(entry) {
 
   return entryList;
   /* When you are logging the tree, use renderEntries([index number here])] to
-     ensure that the dom tree has printed correctly in the log */
+  ensure that the dom tree has printed correctly in the log */
 }
 
 var $unorderedList = document.querySelector('ul');
-window.addEventListener('DOMContentLoaded', function (event) {
 
+window.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
     var journalEntries = renderEntries(data.entries[i]);
     $unorderedList.appendChild(journalEntries);
   }
+});
 
+var $formView = document.querySelector('.hidden');
+var $entriesView = document.querySelector('.new-entry');
+var $navEntries = document.querySelector('.nav-entries');
+var $entries = document.querySelector('.view');
+
+$entriesView.addEventListener('click', function (event) {
+
+  $formView.className = 'view';
+  $entries.className = 'hidden';
+
+});
+
+$navEntries.addEventListener('click', function (event) {
+  $formView.className = 'hidden';
+  $entries.className = 'view';
 });
