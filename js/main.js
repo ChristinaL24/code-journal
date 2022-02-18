@@ -32,8 +32,9 @@ $form.addEventListener('submit', function (event) {
   var $entry = renderEntries(newEntry);
   $unorderedList.prepend($entry);
 
-  /*                           */
-
+  /* Place our function viewEntries in this function so that when we save and submit,
+  it takes us back to the entries page */
+  viewEntries();
 });
 
 /* Refer to the image that is given in instructions create this dom tree;
@@ -82,27 +83,41 @@ window.addEventListener('DOMContentLoaded', function (event) {
     var journalEntries = renderEntries(data.entries[i]);
     $unorderedList.appendChild(journalEntries);
   }
+
 });
 
+/* Codes that handle viewswapping */
 var $formView = document.querySelector('.hidden');
-var $entriesView = document.querySelector('.new-entry');
+var $createEntries = document.querySelector('.new-entry');
 var $navEntries = document.querySelector('.nav-entries');
 var $entries = document.querySelector('.view');
 var $saveButton = document.querySelector('.save');
 
-$entriesView.addEventListener('click', function (event) {
-
+/* this function will be called when we create a condition for the refresh condition */
+$createEntries.addEventListener('click', createNewEntries);
+function createNewEntries(event) {
   $formView.className = 'view';
   $entries.className = 'hidden';
+  data.view = 'entry-form';
+}
 
-});
-
-$navEntries.addEventListener('click', function (event) {
+/* this function will also be called in our condition for the refresh condition */
+$navEntries.addEventListener('click', showEntries);
+function showEntries(event) {
   $formView.className = 'hidden';
   $entries.className = 'view';
-});
+  data.view = 'entries';
+}
 
-$saveButton.addEventListener('click', function (event) {
+$saveButton.addEventListener('submit', viewEntries);
+function viewEntries(event) {
   $formView.className = 'hidden';
   $entries.className = 'view';
-});
+}
+
+/* condition for refresh */
+if (data.view === 'entry-form') {
+  createNewEntries();
+} else {
+  showEntries();
+}
