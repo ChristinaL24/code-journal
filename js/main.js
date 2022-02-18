@@ -35,6 +35,7 @@ $form.addEventListener('submit', function (event) {
   /* Place our function viewEntries in this function so that when we save and submit,
   it takes us back to the entries page */
   viewEntries();
+
 });
 
 /* Refer to the image that is given in instructions create this dom tree;
@@ -113,11 +114,12 @@ $saveButton.addEventListener('submit', viewEntries);
 function viewEntries(event) {
   $formView.className = 'hidden';
   $entries.className = 'view';
+  data.view = 'entries';
 }
 
 /* condition for refresh */
 if (data.view === 'entry-form') {
   createNewEntries();
-} else {
+} else if (data.view === 'entries') {
   showEntries();
 }
