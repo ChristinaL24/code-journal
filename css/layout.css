@@ -62,7 +62,7 @@ a {
   align-items: center;
 }
 
-.float {
+.float-right {
   float: right;
 }
 
@@ -78,6 +78,6 @@ a {
   margin-left: 1rem;
 }
 
-.text-center {
-  text-align: center;
+.padding-top {
+  padding-top: 1rem;
 }

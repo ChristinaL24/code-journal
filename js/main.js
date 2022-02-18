@@ -68,6 +68,10 @@ function renderEntries(entry) {
   titleHeader.textContent = entry.title;
   divThree.appendChild(titleHeader);
 
+  var editIcon = document.createElement('i');
+  editIcon.setAttribute('class', 'fa-solid fa-pen fa-xs float-right padding-top');
+  titleHeader.appendChild(editIcon);
+
   var notesParagraph = document.createElement('p');
   notesParagraph.textContent = entry.notes;
   divThree.appendChild(notesParagraph);
