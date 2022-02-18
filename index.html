@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -21,16 +21,19 @@
     <header>
       <div class="container">
         <div class="row">
-          <div class="column-full">
+          <div class="column-full inline-block-align">
             <h2>Code Journal</h2>
+            <a href="#" class="nav-entries" data-view="entries">Entries</a>
           </div>
         </div>
       </div>
     </header>
     <main>
+      <!---------------- feature 1 --------------------------->
+
       <div class="container">
         <div data-view="entry-form">
-          <form class="form">
+          <form class="form hidden">
             <div class="row">
               <div class="column-full">
                 <h1>New Entry</h1>
@@ -60,12 +63,37 @@
                 <label for="notes">Notes</label>
                 <textarea name="notes" rows="7" id="notes"></textarea>
                 <div class="form-actions">
-                  <button type="submit">SAVE</button>
+                  <button type="submit" class="float save" data-view="form">SAVE</button>
                 </div>
               </div>
             </div>
           </form>
         </div>
+
+        <!----------------feature 2 html------------------------------>
+
+        <div data-view="entries" class="view">
+          <div class="row"">
+            <div class="column-full">
+              <div class="inline-block-align justify-between">
+                <h1>Entries</h1>
+                <a href="#" data-view="form" class="new-entry">NEW</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <div>
+                <p class="text-center no-entries hidden">No Entries Listed</p>
+              </div>
+              <ul class="no-padding ">
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------------>
       </div>
     </main>
     <script src="js/data.js"></script>

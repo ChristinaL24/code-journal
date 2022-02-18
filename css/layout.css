@@ -45,7 +45,39 @@ textarea {
   width: 100%;
 }
 
-header {
-  padding-bottom: 0.75rem;
-  padding-top: 0.75rem;
+button {
+  padding: 0.4rem 0.9rem;
+  margin-top: 1rem;
+}
+
+a {
+  width: 4rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+.inline-block-align {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+}
+
+.float {
+  float: right;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.nav-entries {
+  margin-left: 1rem;
+}
+
+.text-center {
+  text-align: center;
 }
