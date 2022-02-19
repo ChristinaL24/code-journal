@@ -76,9 +76,13 @@ function renderEntries(entry) {
   notesParagraph.textContent = entry.notes;
   divThree.appendChild(notesParagraph);
 
-  return entryList;
+  /* Use setAttribute method on entryList to give each rendered entries an id */
+  entryList.setAttribute('data-entry-id', entry.entryId);
+
   /* When you are logging the tree, use renderEntries(data.entries[index number]) to
   ensure that the dom tree has printed correctly in the log */
+  return entryList;
+
 }
 
 var $unorderedList = document.querySelector('ul');
