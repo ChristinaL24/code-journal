@@ -30,7 +30,7 @@ $form.addEventListener('submit', function (event) {
 
   /* prepending in feature two */
   var $entry = renderEntries(newEntry);
-  $unorderedList.prepend($entry);
+  $entryList.prepend($entry);
 
   /* Place our function viewEntries in this function so that when we save and submit,
   it takes us back to the entries page */
@@ -85,12 +85,14 @@ function renderEntries(entry) {
 
 }
 
-var $unorderedList = document.querySelector('ul');
+/* This variable represents the <ul> in our html; it is also parent element on
+all rendered entries */
+var $entryList = document.querySelector('.entry-list');
 
 window.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
     var journalEntries = renderEntries(data.entries[i]);
-    $unorderedList.appendChild(journalEntries);
+    $entryList.appendChild(journalEntries);
   }
   noEntries();
 });
@@ -145,4 +147,10 @@ if (data.view === 'entry-form') {
   createNewEntries();
 } else if (data.view === 'entries') {
   showEntries();
+}
+
+/* addEventListener for parent element for all rendered entries */
+$entryList.addEventListener('click', iconClickedFunction);
+function iconClickedFunction(event) {
+
 }
