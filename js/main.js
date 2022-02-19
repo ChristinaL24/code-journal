@@ -149,8 +149,12 @@ if (data.view === 'entry-form') {
   showEntries();
 }
 
-/* addEventListener for parent element for all rendered entries */
-$entryList.addEventListener('click', iconClickedFunction);
-function iconClickedFunction(event) {
-
+/* addEventListener for parent element (<ul> element) for all rendered entries */
+/* Tried using element.target.matches but could not get it to work */
+/* Note: element.tagName returns a capitalized tag name */
+$entryList.addEventListener('click', editIconClickedFunction);
+function editIconClickedFunction(event) {
+  if (event.target.tagName === 'I') {
+    return createNewEntries();
+  }
 }
