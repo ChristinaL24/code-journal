@@ -65,6 +65,7 @@ function renderEntries(entry) {
   divOne.appendChild(divThree);
 
   var titleHeader = document.createElement('h2');
+  titleHeader.setAttribute('class', 'entry-name');
   titleHeader.textContent = entry.title;
   divThree.appendChild(titleHeader);
 

@@ -38,6 +38,8 @@
 
 img {
   width: 100%;
+  border-radius: 2%;
+  margin-top: 7.5%;
 }
 
 input,

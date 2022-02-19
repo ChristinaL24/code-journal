@@ -48,3 +48,11 @@ ul {
 i {
   color: #1c658c;
 }
+
+i:hover {
+  cursor: pointer;
+}
+
+.entry-name {
+  border-bottom: 0.1rem solid #4581a1;
+}
