@@ -155,6 +155,7 @@ if (data.view === 'entry-form') {
 /* Note: element.tagName returns a capitalized tag name */
 $entryList.addEventListener('click', editIconClickedFunction);
 function editIconClickedFunction(event) {
+  /* console.log('target name:', event.target.tagName.value); */
   if (event.target.tagName === 'I') {
     return createNewEntries();
   }
