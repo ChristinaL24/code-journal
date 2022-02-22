@@ -12,26 +12,48 @@ var $form = document.querySelector('.form');
 $form.addEventListener('submit', function (event) {
 
   event.preventDefault();
-
-  var newEntry = {
-    title: $form.elements.title.value,
-    url: $form.elements.url.value,
-    notes: $form.elements.notes.value,
-    entryId: data.nextEntryId
-  };
-
-  data.nextEntryId++;
-
-  data.entries.unshift(newEntry);
-
+  /* null = absence of object value; therefore 'if' data.editing === null, we want
+   it to have the original values that are inputted */
+  if (data.editing === null) {
+    var entryObject = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      notes: $form.elements.notes.value,
+      entryId: data.nextEntryId
+    };
+    data.nextEntryId++;
+    data.entries.unshift(entryObject);
+    var $entry = renderEntries(entryObject);
+    $entryList.prepend($entry);
+  /* if data.editing !== null, set the value of entryId to data.editing since we
+   want the values to be updated with the correct entryId */
+  } else {
+    var editEntryValues = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      notes: $form.elements.notes.value,
+      entryId: data.editing
+    };
+    /* Create a loop that iterates over the properties of the data.entries object;
+    if the property entry id's match, assign the value of editEntryValues to data.entry[j] */
+    for (var j = 0; j < data.entries.length; j++) {
+      if (editEntryValues.entryId === data.entries[j].entryId) {
+        data.entries[j] = editEntryValues;
+      }
+    }
+    /* Query the dom for all 'li' elements; Use parseInt to get the data-entry-id;
+    if entryId is strictly equal to the parseInt of our dom variable, use replace method
+    that is mentioned in the hint */
+    var $domEntriesList = document.querySelectorAll('li');
+    for (var k = 0; k < $domEntriesList.length; k++) {
+      if (editEntryValues.entryId === parseInt($domEntriesList[k].getAttribute('data-entry-id'))) {
+        $domEntriesList[k].replaceWith(renderEntries(editEntryValues));
+      }
+    }
+  }
+  data.editing = null;
   $img.setAttribute('src', '../code-journal/images/placeholder-image-square.jpg');
-
   $form.reset();
-
-  /* prepending in feature two */
-  var $entry = renderEntries(newEntry);
-  $entryList.prepend($entry);
-
   /* Place our function viewEntries in this function so that when we save and submit,
   it takes us back to the entries page */
   viewEntries();
@@ -111,6 +133,7 @@ function createNewEntries(event) {
   $formView.className = 'view';
   $entries.className = 'hidden';
   data.view = 'entry-form';
+
 }
 
 /* this function will also be called in our condition for the refresh condition */
@@ -160,22 +183,20 @@ var $notes = document.querySelector('#notes');
 $entryList.addEventListener('click', editIconClickedFunction);
 function editIconClickedFunction(event) {
   if (event.target.tagName === 'I') {
-    createNewEntries();
-  }
-  /* use event.target.closest to target the list that you are clicking on - this will
-  display the correct data entry id on your console */
-  /* parseInt = Use this to convert our data-entry-id into an integer */
-  var getEntryItem = event.target.closest('li');
-  var getEntryObjectId = parseInt(getEntryItem.getAttribute('data-entry-id'));
-
-  for (var i = 0; i < data.entries.length; i++) {
-    if (getEntryObjectId === data.entries[i].entryId) {
-      var entryObjectId = data.entries[i];
-      data.editing = entryObjectId;
+    /* use event.target.closest to target the list that you are clicking on - this will
+    display the correct data entry id on your console */
+    /* parseInt = Use this to convert our data-entry-id into an integer */
+    var getEntryItem = event.target.closest('li');
+    var getEntryObjectId = parseInt(getEntryItem.getAttribute('data-entry-id'));
+    data.editing = getEntryObjectId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (getEntryObjectId === data.entries[i].entryId) {
+        $title.value = data.entries[i].title;
+        $photoInputs.value = data.entries[i].url;
+        $img.setAttribute('src', $photoInputs.value);
+        $notes.value = data.entries[i].notes;
+        createNewEntries();
+      }
     }
   }
-  $title.value = data.editing.title;
-  $photoInputs.value = data.editing.url;
-  $img.setAttribute('src', $photoInputs.value);
-  $notes.value = data.editing.notes;
 }
