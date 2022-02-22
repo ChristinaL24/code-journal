@@ -164,6 +164,7 @@ function editIconClickedFunction(event) {
   }
   /* use event.target.closest to target the list that you are clicking on - this will
   display the correct data entry id on your console */
+  /* parseInt = Use this to convert our data-entry-id into an integer */
   var getEntryItem = event.target.closest('li');
   var getEntryObjectId = parseInt(getEntryItem.getAttribute('data-entry-id'));
 
