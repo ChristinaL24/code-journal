@@ -2,9 +2,9 @@
 /* exported data */
 
 var $img = document.querySelector('img');
-var $inputs = document.querySelector('#photo-url');
+var $photoInputs = document.querySelector('#photo-url');
 
-$inputs.addEventListener('input', function (event) {
+$photoInputs.addEventListener('input', function (event) {
   $img.setAttribute('src', event.target.value);
 });
 
@@ -122,6 +122,8 @@ function showEntries(event) {
   noEntries();
 }
 
+/* this function occurs after the submit is hit; it takes us back to the entries
+page */
 $saveButton.addEventListener('submit', viewEntries);
 function viewEntries(event) {
   $formView.className = 'hidden';
@@ -153,10 +155,26 @@ if (data.view === 'entry-form') {
 /* addEventListener for parent element (<ul> element) for all rendered entries */
 /* Tried using element.target.matches but could not get it to work */
 /* Note: element.tagName returns a capitalized tag name */
+var $title = document.querySelector('#title');
+var $notes = document.querySelector('#notes');
 $entryList.addEventListener('click', editIconClickedFunction);
 function editIconClickedFunction(event) {
-  /* console.log('target name:', event.target.tagName.value); */
   if (event.target.tagName === 'I') {
-    return createNewEntries();
+    createNewEntries();
   }
+  /* use event.target.closest to target the list that you are clicking on - this will
+  display the correct data entry id on your console */
+  var getEntryItem = event.target.closest('li');
+  var getEntryObjectId = parseInt(getEntryItem.getAttribute('data-entry-id'));
+
+  for (var i = 0; i < data.entries.length; i++) {
+    if (getEntryObjectId === data.entries[i].entryId) {
+      var entryObjectId = data.entries[i];
+      data.editing = entryObjectId;
+    }
+  }
+  $title.value = data.editing.title;
+  $photoInputs.value = data.editing.url;
+  $img.setAttribute('src', $photoInputs.value);
+  $notes.value = data.editing.notes;
 }
