@@ -56,3 +56,7 @@ i:hover {
 .entry-name {
   border-bottom: 0.1rem solid #4581a1;
 }
+
+a {
+  color: red;
+}

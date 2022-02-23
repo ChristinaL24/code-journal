@@ -57,7 +57,6 @@ $form.addEventListener('submit', function (event) {
   /* Place our function viewEntries in this function so that when we save and submit,
   it takes us back to the entries page */
   viewEntries();
-
 });
 
 /* Refer to the image that is given in instructions create this dom tree;
@@ -133,7 +132,7 @@ function createNewEntries(event) {
   $formView.className = 'view';
   $entries.className = 'hidden';
   data.view = 'entry-form';
-
+  $deleteButton.className = 'delete-entry-div hidden';
 }
 
 /* this function will also be called in our condition for the refresh condition */
@@ -196,7 +195,11 @@ function editIconClickedFunction(event) {
         $img.setAttribute('src', $photoInputs.value);
         $notes.value = data.entries[i].notes;
         createNewEntries();
+        $deleteButton.className = 'delete-entry-div';
       }
     }
   }
 }
+
+/* Feature 4: delete button */
+var $deleteButton = document.querySelector('.delete-entry-div');
