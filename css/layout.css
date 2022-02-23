@@ -34,10 +34,12 @@
   }
 }
 
-/* My code */
+/* My codes */
 
 img {
   width: 100%;
+  border-radius: 2%;
+  margin-top: 7.5%;
 }
 
 input,
@@ -62,7 +64,7 @@ a {
   align-items: center;
 }
 
-.float {
+.float-right {
   float: right;
 }
 
@@ -78,6 +80,6 @@ a {
   margin-left: 1rem;
 }
 
-.text-center {
-  text-align: center;
+.padding-top {
+  padding-top: 0.9rem;
 }

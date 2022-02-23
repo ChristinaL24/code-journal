@@ -2,9 +2,9 @@
 /* exported data */
 
 var $img = document.querySelector('img');
-var $inputs = document.querySelector('#photo-url');
+var $photoInputs = document.querySelector('#photo-url');
 
-$inputs.addEventListener('input', function (event) {
+$photoInputs.addEventListener('input', function (event) {
   $img.setAttribute('src', event.target.value);
 });
 
@@ -12,26 +12,48 @@ var $form = document.querySelector('.form');
 $form.addEventListener('submit', function (event) {
 
   event.preventDefault();
-
-  var newEntry = {
-    title: $form.elements.title.value,
-    url: $form.elements.url.value,
-    notes: $form.elements.notes.value,
-    entryId: data.nextEntryId
-  };
-
-  data.nextEntryId++;
-
-  data.entries.unshift(newEntry);
-
+  /* null = absence of object value; therefore 'if' data.editing === null, we want
+   it to have the original values that are inputted */
+  if (data.editing === null) {
+    var entryObject = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      notes: $form.elements.notes.value,
+      entryId: data.nextEntryId
+    };
+    data.nextEntryId++;
+    data.entries.unshift(entryObject);
+    var $entry = renderEntries(entryObject);
+    $entryList.prepend($entry);
+  /* if data.editing !== null, set the value of entryId to data.editing since we
+   want the values to be updated with the correct entryId */
+  } else {
+    var editEntryValues = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      notes: $form.elements.notes.value,
+      entryId: data.editing
+    };
+    /* Create a loop that iterates over the properties of the data.entries object;
+    if the property entry id's match, assign the value of editEntryValues to data.entry[j] */
+    for (var j = 0; j < data.entries.length; j++) {
+      if (editEntryValues.entryId === data.entries[j].entryId) {
+        data.entries[j] = editEntryValues;
+      }
+    }
+    /* Query the dom for all 'li' elements; Use parseInt to get the data-entry-id;
+    if entryId is strictly equal to the parseInt of our dom variable, use replace method
+    that is mentioned in the hint */
+    var $domEntriesList = document.querySelectorAll('li');
+    for (var k = 0; k < $domEntriesList.length; k++) {
+      if (editEntryValues.entryId === parseInt($domEntriesList[k].getAttribute('data-entry-id'))) {
+        $domEntriesList[k].replaceWith(renderEntries(editEntryValues));
+      }
+    }
+  }
+  data.editing = null;
   $img.setAttribute('src', '../code-journal/images/placeholder-image-square.jpg');
-
   $form.reset();
-
-  /* prepending in feature two */
-  var $entry = renderEntries(newEntry);
-  $unorderedList.prepend($entry);
-
   /* Place our function viewEntries in this function so that when we save and submit,
   it takes us back to the entries page */
   viewEntries();
@@ -65,24 +87,35 @@ function renderEntries(entry) {
   divOne.appendChild(divThree);
 
   var titleHeader = document.createElement('h2');
+  titleHeader.setAttribute('class', 'entry-name');
   titleHeader.textContent = entry.title;
   divThree.appendChild(titleHeader);
+
+  var editIcon = document.createElement('i');
+  editIcon.setAttribute('class', 'fa-solid fa-pen fa-xs float-right padding-top');
+  titleHeader.appendChild(editIcon);
 
   var notesParagraph = document.createElement('p');
   notesParagraph.textContent = entry.notes;
   divThree.appendChild(notesParagraph);
 
-  return entryList;
+  /* Use setAttribute method on entryList to give each rendered entries an id */
+  entryList.setAttribute('data-entry-id', entry.entryId);
+
   /* When you are logging the tree, use renderEntries(data.entries[index number]) to
   ensure that the dom tree has printed correctly in the log */
+  return entryList;
+
 }
 
-var $unorderedList = document.querySelector('ul');
+/* This variable represents the <ul> in our html; it is also parent element on
+all rendered entries */
+var $entryList = document.querySelector('.entry-list');
 
 window.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
     var journalEntries = renderEntries(data.entries[i]);
-    $unorderedList.appendChild(journalEntries);
+    $entryList.appendChild(journalEntries);
   }
   noEntries();
 });
@@ -100,6 +133,7 @@ function createNewEntries(event) {
   $formView.className = 'view';
   $entries.className = 'hidden';
   data.view = 'entry-form';
+
 }
 
 /* this function will also be called in our condition for the refresh condition */
@@ -111,6 +145,8 @@ function showEntries(event) {
   noEntries();
 }
 
+/* this function occurs after the submit is hit; it takes us back to the entries
+page */
 $saveButton.addEventListener('submit', viewEntries);
 function viewEntries(event) {
   $formView.className = 'hidden';
@@ -137,4 +173,30 @@ if (data.view === 'entry-form') {
   createNewEntries();
 } else if (data.view === 'entries') {
   showEntries();
+}
+
+/* addEventListener for parent element (<ul> element) for all rendered entries */
+/* Tried using element.target.matches but could not get it to work */
+/* Note: element.tagName returns a capitalized tag name */
+var $title = document.querySelector('#title');
+var $notes = document.querySelector('#notes');
+$entryList.addEventListener('click', editIconClickedFunction);
+function editIconClickedFunction(event) {
+  if (event.target.tagName === 'I') {
+    /* use event.target.closest to target the list that you are clicking on - this will
+    display the correct data entry id on your console */
+    /* parseInt = Use this to convert our data-entry-id into an integer */
+    var getEntryItem = event.target.closest('li');
+    var getEntryObjectId = parseInt(getEntryItem.getAttribute('data-entry-id'));
+    data.editing = getEntryObjectId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (getEntryObjectId === data.entries[i].entryId) {
+        $title.value = data.entries[i].title;
+        $photoInputs.value = data.entries[i].url;
+        $img.setAttribute('src', $photoInputs.value);
+        $notes.value = data.entries[i].notes;
+        createNewEntries();
+      }
+    }
+  }
 }
