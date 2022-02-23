@@ -196,10 +196,15 @@ function editIconClickedFunction(event) {
 /* Feature 4: delete button */
 /* Change the className of this variable and put it in designated functions */
 var $deleteButton = document.querySelector('.delete-entry-div');
-var $modal = document.querySelector('modal');
+var $modal = document.querySelector('.modal');
+var $cancel = document.querySelector('.cancel');
 
 $deleteButton.addEventListener('click', function (event) {
   $modal.style.display = 'flex';
+});
+
+$cancel.addEventListener('click', function (event) {
+  $modal.style.display = 'none';
 });
 
 /* condition for refresh */
