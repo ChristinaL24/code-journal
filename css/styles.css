@@ -60,3 +60,11 @@ i:hover {
 a {
   color: red;
 }
+
+.cancel {
+  background-color: rgb(114, 112, 112);
+}
+
+.confirm {
+  background-color: tomato;
+}

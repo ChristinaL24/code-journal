@@ -166,14 +166,6 @@ function noEntries() {
   }
 }
 
-/* condition for refresh */
-/* call createNewEntries and showEntries here */
-if (data.view === 'entry-form') {
-  createNewEntries();
-} else if (data.view === 'entries') {
-  showEntries();
-}
-
 /* addEventListener for parent element (<ul> element) for all rendered entries */
 /* Tried using element.target.matches but could not get it to work */
 /* Note: element.tagName returns a capitalized tag name */
@@ -202,4 +194,19 @@ function editIconClickedFunction(event) {
 }
 
 /* Feature 4: delete button */
+/* Change the className of this variable and put it in designated functions */
 var $deleteButton = document.querySelector('.delete-entry-div');
+var $modal = document.querySelector('modal');
+
+$deleteButton.addEventListener('click', function (event) {
+  $modal.style.display = 'flex';
+});
+
+/* condition for refresh */
+/* call createNewEntries and showEntries here */
+if (data.view === 'entry-form') {
+  createNewEntries();
+  $deleteButton.className = 'delete-entry-div hidden';
+} else if (data.view === 'entries') {
+  showEntries();
+}
