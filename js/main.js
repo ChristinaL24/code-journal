@@ -57,7 +57,6 @@ $form.addEventListener('submit', function (event) {
   /* Place our function viewEntries in this function so that when we save and submit,
   it takes us back to the entries page */
   viewEntries();
-
 });
 
 /* Refer to the image that is given in instructions create this dom tree;
@@ -133,7 +132,7 @@ function createNewEntries(event) {
   $formView.className = 'view';
   $entries.className = 'hidden';
   data.view = 'entry-form';
-
+  $deleteButton.className = 'delete-entry-div hidden';
 }
 
 /* this function will also be called in our condition for the refresh condition */
@@ -167,14 +166,6 @@ function noEntries() {
   }
 }
 
-/* condition for refresh */
-/* call createNewEntries and showEntries here */
-if (data.view === 'entry-form') {
-  createNewEntries();
-} else if (data.view === 'entries') {
-  showEntries();
-}
-
 /* addEventListener for parent element (<ul> element) for all rendered entries */
 /* Tried using element.target.matches but could not get it to work */
 /* Note: element.tagName returns a capitalized tag name */
@@ -196,7 +187,53 @@ function editIconClickedFunction(event) {
         $img.setAttribute('src', $photoInputs.value);
         $notes.value = data.entries[i].notes;
         createNewEntries();
+        $deleteButton.className = 'delete-entry-div';
       }
     }
   }
+}
+
+/* Feature 4: delete button */
+/* Change the className of this variable and put it in designated functions */
+var $deleteButton = document.querySelector('.delete-entry-div');
+var $modal = document.querySelector('.modal');
+var $cancel = document.querySelector('.cancel');
+var $confirm = document.querySelector('.confirm');
+
+$deleteButton.addEventListener('click', function (event) {
+  $modal.style.display = 'flex';
+});
+
+$cancel.addEventListener('click', function (event) {
+  $modal.style.display = 'none';
+});
+
+/* code for delete confirmation */
+
+$confirm.addEventListener('click', confirmFunction);
+function confirmFunction(event) {
+
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.editing === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+
+    }
+  }
+  var $domEntriesList = document.querySelectorAll('li');
+  for (var j = 0; j < $domEntriesList.length; j++) {
+    if (data.editing === parseInt($domEntriesList[j].getAttribute('data-entry-id'))) {
+      $domEntriesList[j].remove();
+    }
+  }
+  showEntries();
+  $modal.style.display = 'none';
+}
+
+/* condition for refresh */
+/* call createNewEntries and showEntries here */
+if (data.view === 'entry-form') {
+  createNewEntries();
+  $deleteButton.className = 'delete-entry-div hidden';
+} else if (data.view === 'entries') {
+  showEntries();
 }

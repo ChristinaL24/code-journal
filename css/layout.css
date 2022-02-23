@@ -49,7 +49,6 @@ textarea {
 
 button {
   padding: 0.4rem 0.9rem;
-  margin-top: 1rem;
 }
 
 a {
@@ -80,6 +79,42 @@ a {
   margin-left: 1rem;
 }
 
+.save-delete-div {
+  display: flex;
+  justify-content: space-between;
+}
+
 .padding-top {
-  padding-top: 0.9rem;
+  padding-top: 1rem;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.651);
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.modal-content {
+  background-color: rgb(255 255 255);
+  width: 25rem;
+  height: 8rem;
+  border-radius: 5px;
+  position: fixed;
+  top: 10rem;
+  left: 9rem;
+}
+
+.cancel-confirm-buttons {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-text {
+  padding-left: 2rem;
 }
